@@ -1,0 +1,219 @@
+body {
+    font-family: 'Spectral', serif;;
+}
+
+.background-primary {
+    background-color: #112D4E;
+}
+
+.button-primary {
+    background-color: #112D4E;
+    color: white;
+}
+
+.button-secondary {
+    background-color: white;
+    color: #112D4E;
+}
+
+.button-primary:hover {
+    background-color: #3F72AF;
+    color: #EFEFEF;
+}
+
+.nav-link { 
+    color: #3F72AF !important;
+}
+
+.active {
+    color: #112D4E !important;
+    font-weight: 500;
+    border-bottom: 0.1rem solid #112D4E;
+}
+
+.choose-reasons {
+    font-family: 'inter', sans-serif;
+}
+
+.choose-reasons p {
+    color: #6B7588;
+    font-weight: 300;
+}
+
+.card-promos {
+    border: 0px solid white;
+    border-radius: 20px;
+    background-color: white;
+    transition: all;
+    transition-duration: 200ms;
+}
+
+.card-promos:hover {
+    cursor: pointer;
+    background-color: #EFEFEF;
+}
+
+.card-invest {
+    border: 0px solid white;
+    border-radius: 10px;
+    background-color: white;
+    transition: all;
+    transition-duration: 200ms;
+}
+
+.select-amount {
+    border: 1px solid #112D4E;
+    border-radius: 10px;
+    background-color: white;
+    transition: all;
+    transition-duration: 200ms;
+    cursor: pointer;
+}
+
+.select-amount .selected {
+    border-radius: 10px;
+    background-color: #112D4E !important;
+    color: white;
+}
+
+.footer {
+    font-family: 'inter', sans-serif;
+    background: #101419;
+}
+
+.owl-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+.owl-dot {
+    display: inline-block;
+    height: 10px !important;
+    width: 10px !important;
+    background-color: #878787 !important;
+    opacity: 0.8;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+.owl-dot.active {
+    background-color: white !important;
+}
+
+.form-amount {
+    height: 61px;
+    border-radius: 6px;
+}
+
+.detail-choose {
+    color: #112D4E !important;
+    border-bottom: 2px solid #112D4E;
+}
+
+/* body {
+    font-family: 'Spectral', serif;;
+}
+
+.background-primary {
+    background-color: #112D4E;
+}
+
+.button-primary {
+    background-color: #E45826;
+    color: white;
+}
+
+.button-secondary {
+    background-color: white;
+    color: #112D4E;
+}
+
+.button-primary:hover {
+    background-color: #3F72AF;
+    color: #EFEFEF;
+}
+
+.nav-link { 
+    color: #3F72AF !important;
+}
+
+.active {
+    color: #112D4E !important;
+    font-weight: 500;
+    border-bottom: 0.1rem solid #112D4E;
+}
+
+.choose-reasons {
+    font-family: 'inter', sans-serif;
+}
+
+.choose-reasons p {
+    color: #6B7588;
+    font-weight: 300;
+}
+
+.card-promos {
+    border: 0px solid white;
+    border-radius: 20px;
+    background-color: white;
+    transition: all;
+    transition-duration: 200ms;
+}
+
+.card-promos:hover {
+    cursor: pointer;
+    background-color: #EFEFEF;
+}
+
+.card-invest {
+    border: 0px solid white;
+    border-radius: 10px;
+    background-color: white;
+    transition: all;
+    transition-duration: 200ms;
+}
+
+.select-amount {
+    border: 1px solid #112D4E;
+    border-radius: 10px;
+    background-color: white;
+    transition: all;
+    transition-duration: 200ms;
+    cursor: pointer;
+}
+
+.select-amount .selected {
+    border-radius: 10px;
+    background-color: #112D4E !important;
+    color: white;
+}
+
+.footer {
+    font-family: 'inter', sans-serif;
+    background: #019267;
+}
+
+.owl-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+.owl-dot {
+    display: inline-block;
+    height: 10px !important;
+    width: 10px !important;
+    background-color: #878787 !important;
+    opacity: 0.8;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+.owl-dot.active {
+    background-color: white !important;
+}
+
+.form-amount {
+    height: 61px;
+    border-radius: 6px;
+}
+
+.detail-choose {
+    color: #112D4E !important;
+    border-bottom: 2px solid #112D4E;
+} */
