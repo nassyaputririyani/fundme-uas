@@ -122,18 +122,4 @@ $(document).ready(function(){
         doc.text($('#long-description').text(), -30, 80)
         doc.save(`business-proposal_${$('#title').text()}.pdf`)
    })
-
-   $('#login-button').click((e) => {
-        if (!$('#email').val()) {
-            $('#error-email').text("Email cannot empty")
-        }
-
-        if (!$('#password').val()) {
-            $('#error-password').text("Password cannot empty")
-        }
-
-        if ($('#email').val() && $('#password').val()) {
-            $('form#login-form').submit();
-        }
-   })
 });

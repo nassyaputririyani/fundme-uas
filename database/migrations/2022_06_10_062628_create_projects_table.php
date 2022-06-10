@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('short_description');
             $table->text('description');
             $table->string('business_proposal_url');
+            $table->string('image_url');
             $table->string('goals');
             $table->integer('goal_amount');
             $table->integer('current_amount')->default(0);

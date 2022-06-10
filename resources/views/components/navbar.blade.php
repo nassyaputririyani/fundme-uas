@@ -12,26 +12,44 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link mx-lg-4 {{ ($title === "Home") ? 'active' : '' }}" aria-current="page" href="#">
+                    <a class="nav-link mx-lg-4 {{ ($title === "Home") ? 'active' : '' }}" aria-current="page" href="{{ route('index') }}">
                         Home
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-lg-4 {{ ($title === "Discover Project") ? 'active' : '' }}" href="#">
+                    <a class="nav-link mx-lg-4 {{ ($title === "Discover Project") ? 'active' : '' }}" href="{{ route('project.index') }}">
                         Discover Project
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-lg-4 {{ ($title === "About Us") ? 'active' : '' }}" href="#">
+                    <a class="nav-link mx-lg-4 {{ ($title === "About Us") ? 'active' : '' }}" href="{{ route('about-us') }}">
                         About Us
                     </a>
                 </li>
                
+                @guest
                     <li class="nav-item mt-2 mt-lg-0 ms-lg-3">
                         <a class="btn button-primary w-100 btn-lg fs-6" href="/login">
                             Login
                         </a>
                     </li>
+                @endguest
+
+                @auth
+                    <li class="nav-item mt-2 mt-lg-0 ms-lg-3 dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Dashboard</a>
+                            <a class="dropdown-item" href="#">Edit Profile</a>
+                            <form action="{{ route('logout') }}" id="form-logout" method="POST">
+                                @csrf
+                            </form>
+                            <a class="dropdown-item" href="#" onclick="$('#form-logout').submit();">Log Out</a>
+                        </div>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>

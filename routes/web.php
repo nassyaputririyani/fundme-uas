@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProjectController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,20 +18,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home', [
-        "title" => "Home",
-    ]);
-});
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::get('/login', function () {
-    return view('login', [
-        "title" => "Login"
-    ]);
+Route::middleware('guest')->group(function() {
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::post('/login', [AuthController::class, 'storeLogin'])->name('login.store');
 });
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::get('/register', function () { 
     return view('register', [
         "title" => "Register"
     ]); 
 });
+
+Route::get('/projects', [ProjectController::class, 'index'])->name('project.index');
+
+// About us
+Route::get('/about-us', [AboutController::class, 'index'])->name('about-us');
