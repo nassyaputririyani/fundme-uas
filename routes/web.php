@@ -33,6 +33,9 @@ Route::get('/register', function () {
 });
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('project.index');
+Route::get('/projects/{id}', [ProjectController::class, 'detail'])->name('project.detail');
+Route::post('/projects/{id}', [ProjectController::class, 'fundProject'])->name('project.fund-project');
+Route::get('/projects/{id}/success', [ProjectController::class, 'showSuccessPage'])->name('project.fund-project.success');
 
 // About us
 Route::get('/about-us', [AboutController::class, 'index'])->name('about-us');
