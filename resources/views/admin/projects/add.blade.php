@@ -80,7 +80,11 @@
                             <div class="form-group">
                                 <label for="goals">Goals</label>
                                 <select name="goals[]" id="goals" class="form-control" multiple>
-                                    <option value="">Type a Goals and enter</option>
+                                    @if (old('goals'))
+                                        @for ($i = 0; $i < count(old('goals'));   $i++)
+                                            <option selected>{{ old('goals')[$i]  }}</option>
+                                        @endfor
+                                    @endif
                                 </select>
                                 @error('goals')
                                     <p class="text-danger">

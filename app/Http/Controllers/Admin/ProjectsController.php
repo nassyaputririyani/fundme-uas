@@ -37,7 +37,7 @@ class ProjectsController extends Controller
         $rank_transactions = DB::table('transactions')
             ->join('users', 'users.id', '=' , 'transactions.users_id')
             ->join('projects', 'projects.id', '=', 'transactions.projects_id')
-            ->selectRaw('users.name, transactions.id, transactions.amount, DENSE_RANK() OVER (ORDER BY transactions.amount) as rank')
+            ->selectRaw('users.name, transactions.id, transactions.amount, DENSE_RANK() OVER (ORDER BY transactions.amount DESC) as rank')
             ->where('projects.id', '=', $project->id)
             ->get();
 

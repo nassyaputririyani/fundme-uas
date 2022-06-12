@@ -43,21 +43,19 @@
                             </div>
                         </div>
 
-                        <a href="javascript:void(0)" id="list-business" class="d-block" style="text-decoration: none;">
+                        <a href="{{ asset('business_proposal/' . $project->business_proposal_url) }}" target="_blank" id="list-business" class="d-block" style="text-decoration: none;">
                             <div class="d-flex mt-3">
                                 <i class="fa fa-file" style="font-size: 30pt; color: #6B7588"></i>
                                 <div class="ms-4">
                                     <p style="margin: 0; color: #6B7588;">
-                                        <a href="{{ asset('business_proposal/' . $project->business_proposal_url) }}" target="_blank">
-                                            {{ $project->business_proposal_url }}
-                                        </a>
+                                        {{ $project->business_proposal_url }}
                                     </p>
                                     <p style="margin: 0; color: #C7C9D9">
                                         @if ($size > 0)
                                             @if ($size > 1000000)
-                                                {{ $size / 1000 / 1000 }} MB
+                                                {{ $size / 1000 / 1000 }} Mb
                                             @else
-                                                {{ $size / 1000 }} KB
+                                                {{ $size / 1000 }} Kb
                                             @endif
                                         @else
                                             Invalid size!
