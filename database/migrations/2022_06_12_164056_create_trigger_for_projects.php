@@ -21,11 +21,15 @@ return new class extends Migration
             FOR EACH ROW
             BEGIN
                 DECLARE goals_amount INT;
+                DECLARE curr_amount INT;
+                DECLARE total_amount INT;
                 
                 SELECT projects.goal_amount INTO goals_amount FROM projects WHERE projects.id = NEW.projects_id;
+                SELECT projects.current_amount INTO curr_amount FROM projects WHERE projects.id = NEW.projects_id;
             
                 IF NEW.status = "paid" THEN
-                    IF NEW.amount >= goals_amount THEN
+                    SET total_amount = curr_amount + goals_amount;
+                    IF total_amount >= goals_amount THEN
                         UPDATE projects SET projects.status = "not-active" WHERE projects.id = NEW.projects_id;
                     END IF;
                     

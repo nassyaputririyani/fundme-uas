@@ -5,7 +5,7 @@ function toCurrency($symbol, $value) {
 }
 
 function date_formatter($date) {
-  return date('d F Y', strtotime($date));
+  return date('d F Y', strtotime($date)); // yyyy-mm-dd
 }
 
 function reproduce_percentage($value, $total) {

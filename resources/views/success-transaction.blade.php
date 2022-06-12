@@ -1,14 +1,16 @@
 @extends('layouts.main')
 
 @section('content')
-  <main class="container" style="padding-bottom: 200px;">
+  <main class="container" style="padding-bottom: 80px;">
     <div class="row align-items-center pb-5">
         <div class="col-md-6 mx-auto">
             <div class="card shadow border px-5 py-5" style="border-radius: 20px;">
                 <div class="card-body d-flex flex-column align-items-center">
                     <img class="card-img-top" src="{{ asset('images/success.png') }}" alt="Card image">
-                    <p class="card-text mt-4" style="text-align: center;">Your investment is successfull, the organization of project will contact you.</p>
-                    <a href="{{ route('index') }}" class="btn btn-primary btn-lg mt-4">Back to Home</a>
+                    <p class="card-text mt-4" style="text-align: center;">
+                      You're getting closer to finish the investment, checkout the transaction in your transaction list page and finish the payment
+                    </p>
+                    <a href="{{ route('admin.transactions.index') }}" class="btn btn-primary btn-lg mt-4">Go to transactions</a>
                 </div>
             </div>
         </div>
