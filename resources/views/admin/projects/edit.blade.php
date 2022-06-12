@@ -44,9 +44,9 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('type')
+                                    @error('users_id')
                                         <p class="text-danger">
-                                            {{ $errors->first('type') }}
+                                            {{ $errors->first('users_id') }}
                                         </p>
                                     @enderror
                                 </div>
@@ -139,6 +139,21 @@
                                     </p>
                                 @enderror
                             </div>
+                            @if (Auth::user()->role == 'admin')
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="">Choose Status of Project</option>
+                                        <option {{ $project->status == 'active' ? 'selected' : '' }} value="active">Active</option>
+                                        <option {{ $project->status == 'not-active' ? 'selected' : '' }} value="not-active">Not Active</option>
+                                    </select>
+                                    @error('status')
+                                        <p class="text-danger">
+                                            {{ $errors->first('status') }}
+                                        </p>
+                                    @enderror
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">
                                     Simpan

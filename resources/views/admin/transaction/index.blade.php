@@ -7,12 +7,12 @@
         <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">Projects</h1>
+            <h1 class="m-0">Transactions</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Projects</li>
+                <li class="breadcrumb-item active">Transactions</li>
             </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -27,58 +27,53 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Daftar Project</h3>
-                      <a href="{{ route('admin.projects.add') }}" class="btn btn-sm btn-primary float-right">
-                          Tambah
-                      </a>
+                      <h3 class="card-title">Transaction list</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                       <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Owner</th>
-                                <th>Goals</th>
-                                <th>Goal Amount</th>
-                                <th>Current Amount</th>
-                                <th>Deadline</th>
+                                <th>Name</th>
+                                <th>Transaction ID</th>
+                                <th>Project Title</th>
+                                <th>Amount</th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($projects as $project)
+                            @foreach ($transactions as $transaction)
                             <tr>
-                                <td>{{ $project->title }}</td>
-                                <td>{{ $project->user->name }}</td>
+                                <td>{{ $transaction->user->name }}</td>
+                                <td>{{ $transaction->id }}</td>
+                                <td>{{ $transaction->project->title }}</td>
+                                <td>{{ toCurrency('Rp', $transaction->amount) }}</td>
                                 <td>
-                                    @forelse (explode(',', $project->goals) as $goal)
-                                        <li>
-                                            {{ $goal }}
-                                        </li>
-                                    @empty
-                                        Goals is empty
-                                    @endforelse
-                                </td>
-                                <td>{{ toCurrency("Rp", $project->goal_amount) }}</td>
-                                <td>{{ toCurrency("Rp", $project->current_amount) }}</td>
-                                <td>{{ date_formatter($project->deadline) }}</td>
-                                <td>
-                                    @switch($project->status)
-                                        @case('active')
-                                            <p class="text-success">
-                                                Active
-                                            </p>
+                                    @switch($transaction->status)
+                                        @case('pending')
+                                            <div class="badge badge-warning text-light">
+                                                Pending
+                                            </div>
+                                            @break
+                                        @case('paid')
+                                            <div class="badge badge-success text-light">
+                                                Paid
+                                            </div>
+                                            @break
+                                        @case('cancelled')
+                                            <div class="badge badge-danger text-light">
+                                                Cancelled
+                                            </div>
                                             @break
                                         @default
-                                            <p class="text-danger">
-                                                Not Active
-                                            </p>
+                                            <div class="badge badge-danger text-light">
+                                                Failed
+                                            </div>
                                     @endswitch
                                 </td>
                                 <td>
-                                    <form action="{{ route('admin.projects.delete', $project->id) }}" method="POST" class="d-flex">
+                                    {{-- <form action="{{ route('admin.projects.delete', $project->id) }}" method="POST" class="d-flex">
                                         @csrf
                                         @method('DELETE')
 
@@ -94,19 +89,53 @@
                                             Delete
                                         </button>
                                         
-                                    </form>
+                                    </form> --}}
+                                    @switch($transaction->status)
+                                        @case('pending')
+                                                @if (Auth::user()->role == 'admin')
+                                                    <form class="hidden" action="{{ route('admin.transactions.update-status', $transaction->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        
+                                                        <input type="hidden" name="status" value="paid">
+
+                                                        <button class="btn btn-sm btn-success" type="submit">
+                                                            Accept Payment
+                                                        </button>
+                                                    </form>
+                                                @else
+                                                    <form class="hidden d-flex" action="{{ route('admin.transactions.update-status', $transaction->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        
+                                                        <input type="hidden" name="status" value="cancelled">
+
+                                                        <a href="{{ $transaction->payment_url }}" class="btn btn-primary btn-sm mr-2" target="_blank">
+                                                            Pay the bill
+                                                        </a>
+
+                                                        <button class="btn btn-sm btn-danger" type="submit">
+                                                            Cancel
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @break
+                                        @case('paid')
+                                            @break
+                                        @case('cancelled')
+                                            @break
+                                        @default
+                                    @endswitch
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Title</th>
-                                <th>Owner</th>
-                                <th>Goals</th>
-                                <th>Goal Amount</th>
-                                <th>Current Amount</th>
-                                <th>Deadline</th>
+                                <th>Name</th>
+                                <th>Transaction ID</th>
+                                <th>Project Title</th>
+                                <th>Amount</th>
                                 <th>Status</th>
                                 <th></th>
                             </tr>

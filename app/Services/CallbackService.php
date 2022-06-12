@@ -56,7 +56,7 @@ class CallbackService extends Midtrans {
     {
         $notification = new Notification();
  
-        $orderNumber = $notification->order_id;
+        $orderNumber = explode('-', $notification->order_id)[2];
         $transaction = Transaction::where('id', $orderNumber)->first();
  
         $this->notification = $notification;

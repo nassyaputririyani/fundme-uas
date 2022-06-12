@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectsController extends Controller
@@ -27,6 +29,19 @@ class ProjectsController extends Controller
             $users = User::all();
         }
         return view('admin.projects.add', ['users' => $users]);
+    }
+
+    public function show($id) {
+        $project = Project::findOrFail($id);
+        // $rank_transactions = DB::raw('SELECT  FROM transactions');
+        $rank_transactions = DB::table('transactions')
+            ->join('users', 'users.id', '=' , 'transactions.users_id')
+            ->join('projects', 'projects.id', '=', 'transactions.projects_id')
+            ->selectRaw('users.name, transactions.id, transactions.amount, DENSE_RANK() OVER (ORDER BY transactions.amount) as rank')
+            ->where('projects.id', '=', $project->id)
+            ->get();
+
+        return view('admin.projects.detail', ['project' => $project, 'rank_transactions' => $rank_transactions]);
     }
 
     public function store(Request $request) {
@@ -130,6 +145,10 @@ class ProjectsController extends Controller
 
         if ($request->users_id) {
             $data['users_id'] = $request->users_id;
+        }
+
+        if ($request->status) {
+            $data['status'] = $request->status;
         }
 
         if ($request->file('business_proposal')) {
