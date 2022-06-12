@@ -5,7 +5,7 @@
      <main>
       <!-- Heading -->
       <div class="pb-5">
-          <img src="{{ $project->image_url }}" alt="Detail Project" class="w-100" style="object-fit: cover" height="350px">
+          <img src="{{  asset('image/' . $project->image_url) }}" alt="Detail Project" class="w-100" style="object-fit: cover" height="350px">
 
           <div class="container py-5">
               <div class="row">
@@ -48,10 +48,20 @@
                                 <i class="fa fa-file" style="font-size: 30pt; color: #6B7588"></i>
                                 <div class="ms-4">
                                     <p style="margin: 0; color: #6B7588;">
-                                        {{ $project->business_proposal_url }}
+                                        <a href="{{ asset('business_proposal/' . $project->business_proposal_url) }}" target="_blank">
+                                            {{ $project->business_proposal_url }}
+                                        </a>
                                     </p>
                                     <p style="margin: 0; color: #C7C9D9">
-                                        1.24 MB
+                                        @if ($size > 0)
+                                            @if ($size > 1000000)
+                                                {{ $size / 1000 / 1000 }} MB
+                                            @else
+                                                {{ $size / 1000 }} KB
+                                            @endif
+                                        @else
+                                            Invalid size!
+                                        @endif
                                     </p>
                                 </div>
                             </div>
@@ -59,18 +69,9 @@
 
                         <div class="list-goals d-none w-100 mt-2" id="list-goals">
                             <ul>
-                                <li class="mb-4">
-                                    First Goals
-                                </li>
-                                <li class="mb-4">
-                                    Second Goals
-                                </li>
-                                <li class="mb-4">
-                                    Third Goals
-                                </li>
-                                <li class="mb-4">
-                                    Fourth Goals
-                                </li>
+                                @foreach (explode(',', $project->goals) as $goal)
+                                    <li>{{ $goal }}</li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -124,12 +125,18 @@
                                 @enderror
 
                                 @auth
-                                    <button type="submit" class="btn button-primary w-100 btn-lg fs-6 mt-5 py-2">
-                                        Proceed
-                                    </button>
+                                    @if ($project->status == 'active')
+                                        <button type="submit" class="btn button-primary w-100 btn-lg fs-6 mt-5 py-2">
+                                            Procceed
+                                        </button>
+                                    @else
+                                        <a class="btn button-primary w-100 btn-lg fs-6 mt-5 py-2 disabled">
+                                            Projects is not active
+                                        </a>
+                                    @endif
                                 @endauth
                                 @guest
-                                    <a class="btn button-primary w-100 btn-lg fs-6 mt-5 py-2 disabled" href="{{ route('login') }}">
+                                    <a class="btn button-primary w-100 btn-lg fs-6 mt-5 py-2 disabled">
                                         Login to continue
                                     </a>
                                 @endguest

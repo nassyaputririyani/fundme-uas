@@ -7,18 +7,23 @@ use App\Models\Transaction;
 use App\Services\CreateSnapURLService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
     public function index() {
-        $projects = Project::paginate(9);
+        $projects = Project::all();
         return view('projects', ['projects' => $projects, 'title' => 'Discover Project']);
     }
 
     public function detail($id) {
         $project = Project::findOrFail($id);
-        return view('detail-projects', ['project' => $project, 'title' => 'Detail Project']);
+        $size = -1;
+        if (file_exists(public_path('business_proposal') . '/' . $project->business_proposal_url)) {
+            $size = File::size(public_path('business_proposal') . '/' . $project->business_proposal_url);
+        }
+        return view('detail-projects', ['project' => $project, 'title' => 'Detail Project', 'size' => $size]);
     }
 
     public function fundProject($id, Request $request) {

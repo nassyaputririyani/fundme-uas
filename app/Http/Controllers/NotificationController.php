@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Transaction;
+use App\Mail\NotifyPayment;
 use App\Services\CallbackService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class NotificationController extends Controller
 {
@@ -20,6 +20,9 @@ class NotificationController extends Controller
             if ($callback->isSuccess() == 1) {
                 $transaction->status = 'paid';
                 $transaction->save();
+
+                Mail::to($transaction->user->email)->send(new NotifyPayment());
+
                 Log::info('Berhasil sukses transaksi ' . $transaction->id);
             }
  

@@ -18,7 +18,7 @@ class CreateSnapURLService extends Midtrans {
   {
     $params = [
       'transaction_details' => [
-        'order_id' => $this->transaction->id,
+        'order_id' => 'TRANSACTION-FUND_ME-' . $this->transaction->id,
         'gross_amount' => $this->transaction->amount
       ],
       'item_details' => [

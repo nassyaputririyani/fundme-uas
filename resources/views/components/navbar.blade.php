@@ -41,7 +41,7 @@
                             {{ Auth::user()->name }}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Dashboard</a>
+                            <a class="dropdown-item" href="{{ route('admin.index') }}">Dashboard</a>
                             <form action="{{ route('logout') }}" id="form-logout" method="POST">
                                 @csrf
                             </form>

@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProjectsController as AdminProjectController;
+use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificationController;
@@ -41,3 +44,18 @@ Route::get('/about-us', [AboutController::class, 'index'])->name('about-us');
 
 // Notification receive
 Route::post('payments/receive-notification', [NotificationController::class, 'receivePayment']);
+
+Route::prefix('/admin')->middleware('auth')->group(function() {
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.index');
+
+    Route::get('/projects', [AdminProjectController::class, 'index'])->name('admin.projects.index');
+    Route::get('/projects/{id}/detail', [AdminProjectController::class, 'show'])->name('admin.projects.detail');
+    Route::get('/projects/add', [AdminProjectController::class, 'add'])->name('admin.projects.add');
+    Route::post('/projects/add', [AdminProjectController::class, 'store'])->name('admin.projects.store');
+    Route::get('/projects/edit/{id}', [AdminProjectController::class, 'edit'])->name('admin.projects.edit');
+    Route::put('/projects/edit/{id}', [AdminProjectController::class, 'update'])->name('admin.projects.update');
+    Route::delete('/projects/delete/{id}', [AdminProjectController::class, 'destroy'])->name('admin.projects.delete');
+
+    Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions.index');
+    Route::put('/transactions/{id}', [AdminTransactionController::class, 'changeStatus'])->name('admin.transactions.update-status');
+});

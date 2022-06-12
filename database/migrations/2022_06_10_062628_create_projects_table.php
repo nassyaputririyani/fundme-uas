@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('goal_amount');
             $table->integer('current_amount')->default(0);
             $table->date('deadline');
+            $table->string('status')->default('active')->comment('active, not-active');
             $table->timestamps();
 
             $table->foreign('users_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
