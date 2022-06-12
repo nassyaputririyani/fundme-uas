@@ -26,315 +26,75 @@
                 </div>
             </div>
         </div>
+        
+         <!-- Explore -->
+         <div class="container-fluid py-5 background-primary mt-lg-5" id="explore">
+            <div class="row px-2 px-lg-5 py-lg-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="d-flex bd-highlight">
+                            <div class="p-2 flex-grow-1 bd-highlight">
+                                <p class="text-light fs-3 fw-bold">
+                                    Newest Projects
+                                </p>
+                            </div>
+                            <div class="p-2 bd-highlight">
+                                <a class="btn button-secondary btn-lg fs-6">
+                                    See All
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-lg-4">
+                        <div class="col-md-12">
+                            <div class="owl-carousel">
+                                @forelse ($projects as $project)
+                                    <div class="card-promos" id="card-promos-{{ $project->id }}", data-id-project="{{ $project->id }}">
+                                        <img src="{{ $project->image_url }}" style="border-top-left-radius: 10px; border-top-right-radius: 10px; object-fit: cover" class="w-100" alt="Promo">
+                                        <div class="container px-4 pt-4 py-2">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3 class="fs-4 fw-bold text-truncate">
+                                                        {{ $project->title }}
+                                                    </h3>
+                                                    <p class="fw-light fs-6 mt-3 text-truncate" style="color: #6B7588;">
+                                                        {{ $project->short_description }}
+                                                    </p>
 
-                                <div class="card-promos" id="card-promos">
-                                    <img src="images/dummy_promos.png" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" class="w-100" alt="Promo">
-                                    <div class="container px-4 pt-4 py-2">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3 class="fs-4 fw-bold">
-                                                    Trash In
-                                                </h3>
-                                                <p class="fw-light fs-5 mt-3" style="color: #6B7588;">
-                                                    We create platform that can make
-                                                    the trash can become an e-money.
-                                                </p>
+                                                    <div class="d-flex bd-highlight">
+                                                        <div class="flex-grow-1 bd-highlight">
+                                                            <p class="fs-6" style="color: #112D4E;">
+                                                                Goals
+                                                            </p>
+                                                        </div>
+                                                        <div class="flex-grow-1 bd-highlight text-end">
+                                                            <p class="fs-6" style="color: #112D4E;">
+                                                                {{ toCurrency("Rp", $project->goal_amount) }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
 
-                                                <div class="d-flex bd-highlight">
-                                                    <div class="flex-grow-1 bd-highlight">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Goals
-                                                        </p>
+                                                    <div class="progress">
+                                                        <div 
+                                                            class="progress-bar" 
+                                                            role="progressbar" 
+                                                            style="width: {{ reproduce_percentage($project->current_amount, $project->goal_amount) }}%; background-color: #3F72AF;border-radius:20px" 
+                                                            aria-valuenow="{{ reproduce_percentage($project->current_amount, $project->goal_amount) }}" 
+                                                            aria-valuemin="0" 
+                                                            aria-valuemax="100"> {{ reproduce_percentage($project->current_amount, $project->goal_amount) }}%
+                                                        </div>
                                                     </div>
-                                                    <div class="flex-grow-1 bd-highlight text-end">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Rp5.600.000
-                                                        </p>
-                                                    </div>
+
+                                                    <p class="mt-3 fw-light" style="color: #8F90A6;">
+                                                        <i class="fas fa-clock me-2"></i> {{ date_formatter($project->deadline) }}
+                                                    </p>
                                                 </div>
-
-                                                <div class="progress">
-                                                    <div 
-                                                        class="progress-bar" 
-                                                        role="progressbar" 
-                                                        style="width: 50%; background-color: #3F72AF;border-radius:20px" 
-                                                        aria-valuenow="50" 
-                                                        aria-valuemin="0" 
-                                                        aria-valuemax="100"> 50% 
-                                                    </div>
-                                                </div>
-
-                                                <p class="mt-3 fw-light" style="color: #8F90A6;">
-                                                    <i class="fas fa-clock me-2"></i> 23 Hours Left
-                                                </p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-promos" id="card-promos">
-                                    <img src="images/dummy_promos.png" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" class="w-100" alt="Promo">
-                                    <div class="container px-4 pt-4 py-2">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3 class="fs-4 fw-bold">
-                                                    Trash In
-                                                </h3>
-                                                <p class="fw-light fs-5 mt-3" style="color: #6B7588;">
-                                                    We create platform that can make
-                                                    the trash can become an e-money.
-                                                </p>
-
-                                                <div class="d-flex bd-highlight">
-                                                    <div class="flex-grow-1 bd-highlight">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Goals
-                                                        </p>
-                                                    </div>
-                                                    <div class="flex-grow-1 bd-highlight text-end">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Rp5.600.000
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="progress">
-                                                    <div 
-                                                        class="progress-bar" 
-                                                        role="progressbar" 
-                                                        style="width: 50%; background-color: #3F72AF;border-radius:20px" 
-                                                        aria-valuenow="50" 
-                                                        aria-valuemin="0" 
-                                                        aria-valuemax="100"> 50% 
-                                                    </div>
-                                                </div>
-
-                                                <p class="mt-3 fw-light" style="color: #8F90A6;">
-                                                    <i class="fas fa-clock me-2"></i> 23 Hours Left
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-promos" id="card-promos">
-                                    <img src="images/dummy_promos.png" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" class="w-100" alt="Promo">
-                                    <div class="container px-4 pt-4 py-2">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3 class="fs-4 fw-bold">
-                                                    Trash In
-                                                </h3>
-                                                <p class="fw-light fs-5 mt-3" style="color: #6B7588;">
-                                                    We create platform that can make
-                                                    the trash can become an e-money.
-                                                </p>
-
-                                                <div class="d-flex bd-highlight">
-                                                    <div class="flex-grow-1 bd-highlight">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Goals
-                                                        </p>
-                                                    </div>
-                                                    <div class="flex-grow-1 bd-highlight text-end">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Rp5.600.000
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="progress">
-                                                    <div 
-                                                        class="progress-bar" 
-                                                        role="progressbar" 
-                                                        style="width: 50%; background-color: #3F72AF;border-radius:20px" 
-                                                        aria-valuenow="50" 
-                                                        aria-valuemin="0" 
-                                                        aria-valuemax="100"> 50% 
-                                                    </div>
-                                                </div>
-
-                                                <p class="mt-3 fw-light" style="color: #8F90A6;">
-                                                    <i class="fas fa-clock me-2"></i> 23 Hours Left
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-promos" id="card-promos">
-                                    <img src="images/dummy_promos.png" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" class="w-100" alt="Promo">
-                                    <div class="container px-4 pt-4 py-2">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3 class="fs-4 fw-bold">
-                                                    Trash In
-                                                </h3>
-                                                <p class="fw-light fs-5 mt-3" style="color: #6B7588;">
-                                                    We create platform that can make
-                                                    the trash can become an e-money.
-                                                </p>
-
-                                                <div class="d-flex bd-highlight">
-                                                    <div class="flex-grow-1 bd-highlight">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Goals
-                                                        </p>
-                                                    </div>
-                                                    <div class="flex-grow-1 bd-highlight text-end">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Rp5.600.000
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="progress">
-                                                    <div 
-                                                        class="progress-bar" 
-                                                        role="progressbar" 
-                                                        style="width: 50%; background-color: #3F72AF;border-radius:20px" 
-                                                        aria-valuenow="50" 
-                                                        aria-valuemin="0" 
-                                                        aria-valuemax="100"> 50% 
-                                                    </div>
-                                                </div>
-
-                                                <p class="mt-3 fw-light" style="color: #8F90A6;">
-                                                    <i class="fas fa-clock me-2"></i> 23 Hours Left
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-promos" id="card-promos">
-                                    <img src="images/dummy_promos.png" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" class="w-100" alt="Promo">
-                                    <div class="container px-4 pt-4 py-2">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3 class="fs-4 fw-bold">
-                                                    Trash In
-                                                </h3>
-                                                <p class="fw-light fs-5 mt-3" style="color: #6B7588;">
-                                                    We create platform that can make
-                                                    the trash can become an e-money.
-                                                </p>
-
-                                                <div class="d-flex bd-highlight">
-                                                    <div class="flex-grow-1 bd-highlight">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Goals
-                                                        </p>
-                                                    </div>
-                                                    <div class="flex-grow-1 bd-highlight text-end">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Rp5.600.000
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="progress">
-                                                    <div 
-                                                        class="progress-bar" 
-                                                        role="progressbar" 
-                                                        style="width: 50%; background-color: #3F72AF;border-radius:20px" 
-                                                        aria-valuenow="50" 
-                                                        aria-valuemin="0" 
-                                                        aria-valuemax="100"> 50% 
-                                                    </div>
-                                                </div>
-
-                                                <p class="mt-3 fw-light" style="color: #8F90A6;">
-                                                    <i class="fas fa-clock me-2"></i> 23 Hours Left
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-promos" id="card-promos">
-                                    <img src="images/dummy_promos.png" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" class="w-100" alt="Promo">
-                                    <div class="container px-4 pt-4 py-2">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3 class="fs-4 fw-bold">
-                                                    Trash In
-                                                </h3>
-                                                <p class="fw-light fs-5 mt-3" style="color: #6B7588;">
-                                                    We create platform that can make
-                                                    the trash can become an e-money.
-                                                </p>
-
-                                                <div class="d-flex bd-highlight">
-                                                    <div class="flex-grow-1 bd-highlight">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Goals
-                                                        </p>
-                                                    </div>
-                                                    <div class="flex-grow-1 bd-highlight text-end">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Rp5.600.000
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="progress">
-                                                    <div 
-                                                        class="progress-bar" 
-                                                        role="progressbar" 
-                                                        style="width: 50%; background-color: #3F72AF;border-radius:20px" 
-                                                        aria-valuenow="50" 
-                                                        aria-valuemin="0" 
-                                                        aria-valuemax="100"> 50% 
-                                                    </div>
-                                                </div>
-
-                                                <p class="mt-3 fw-light" style="color: #8F90A6;">
-                                                    <i class="fas fa-clock me-2"></i> 23 Hours Left
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-promos" id="card-promos">
-                                    <img src="images/dummy_promos.png" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" class="w-100" alt="Promo">
-                                    <div class="container px-4 pt-4 py-2">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h3 class="fs-4 fw-bold">
-                                                    Trash In
-                                                </h3>
-                                                <p class="fw-light fs-5 mt-3" style="color: #6B7588;">
-                                                    We create platform that can make
-                                                    the trash can become an e-money.
-                                                </p>
-
-                                                <div class="d-flex bd-highlight">
-                                                    <div class="flex-grow-1 bd-highlight">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Goals
-                                                        </p>
-                                                    </div>
-                                                    <div class="flex-grow-1 bd-highlight text-end">
-                                                        <p class="fs-6" style="color: #112D4E;">
-                                                            Rp5.600.000
-                                                        </p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="progress">
-                                                    <div 
-                                                        class="progress-bar" 
-                                                        role="progressbar" 
-                                                        style="width: 50%; background-color: #3F72AF;border-radius:20px" 
-                                                        aria-valuenow="50" 
-                                                        aria-valuemin="0" 
-                                                        aria-valuemax="100"> 50% 
-                                                    </div>
-                                                </div>
-
-                                                <p class="mt-3 fw-light" style="color: #8F90A6;">
-                                                    <i class="fas fa-clock me-2"></i> 23 Hours Left
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @empty
+                                    Belum ada project
+                                @endforelse
                             </div>
                         </div>
                     </div>
