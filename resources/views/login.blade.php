@@ -1,13 +1,5 @@
 @extends('layouts.main')
 
-<style>
-  .card-login {
-    background: #F5F5F5;
-    border-radius: 30px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-  }
-</style>
-
 @section('content')
   <section class="card-login container my-5">
     <div class="row no-gutters">
@@ -46,7 +38,7 @@
                 @enderror
               </div>
                 <p class="text-end">
-                <a href="../forgot-password/forgot-password.html">
+                <a href="{{ route('forgot') }}">
                   Forgot Password
                 </a>
               </p>
@@ -65,4 +57,14 @@
       </div>
     </div>
   </section>
-  @endsection
+@endsection
+
+@push('styles')
+<style>
+  .card-login {
+    background: #F5F5F5;
+    border-radius: 30px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  }
+</style>
+@endpush

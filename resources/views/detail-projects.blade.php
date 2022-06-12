@@ -129,7 +129,7 @@
                                     </button>
                                 @endauth
                                 @guest
-                                    <a class="btn button-primary w-100 btn-lg fs-6 mt-5 py-2 disabled" href="../login/index.php">
+                                    <a class="btn button-primary w-100 btn-lg fs-6 mt-5 py-2 disabled" href="{{ route('login') }}">
                                         Login to continue
                                     </a>
                                 @endguest

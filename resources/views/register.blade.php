@@ -124,39 +124,53 @@
     <div class="container card-register my-5">
         <div class="title"><b>Register</b></div>
         <div class="subtitle">Fill the blank input below here to sign up</div>
-        <form action="#">
+        <form action="{{ route('register.store') }}" method="POST">
+            @csrf
+
             <!-- Title and Input User --> 
             <div class="userInput">
                 <div class="inputBox">
-                    <span class="details">First Name</span>
-                    <input type="text" placeholder="Enter your first name..." required>
-                </div>
-                <div class="inputBox">
-                    <span class="details">Last Name</span>
-                    <input type="text" placeholder="Enter your last name..." required>
-                </div>
-                <div class="inputBox">
-                    <span class="details">Username</span>
-                    <input type="text" placeholder="Enter your username..." required>
+                    <span class="details">Name</span>
+                    <input type="text" name="name" placeholder="Enter your name..." value="{{ old('name') }}">
+                    @error('name')
+                        <p id="error-name" class="text-danger">
+                            {{ $errors->first('name') }}
+                        </p>
+                    @enderror
                 </div>
                 <div class="inputBox">
                     <span class="details">Email</span>
-                    <input type="email" placeholder="Enter your email..." required>
+                    <input type="email" name="email" placeholder="Enter your email..." value="{{ old('email') }}">
+                    @error('email')
+                        <p id="error-email" class="text-danger">
+                            {{ $errors->first('email') }}
+                        </p>
+                    @enderror
                 </div>
                 <div class="inputBox">
                     <span class="details">Password</span>
-                    <input type="password" placeholder="Enter your password..." required>
+                    <input type="password" name="password" placeholder="Enter your password..." value="{{ old('password') }}">
+                    @error('password')
+                        <p id="error-password" class="text-danger">
+                            {{ $errors->first('password') }}
+                        </p>
+                    @enderror
                 </div>
                 <div class="inputBox">
                     <span class="details">Confirm Password</span>
-                    <input type="password" placeholder="Confirm your password..." required>
+                    <input type="password" name="password_confirmation" placeholder="Confirm your password..." value="{{ old('password_confirmation') }}">
+                    @error('password_confirmation')
+                        <p id="error-password_confirmation" class="text-danger">
+                            {{ $errors->first('password_confirmation') }}
+                        </p>
+                    @enderror
                 </div>
             </div>
 
             <!--User Gender Radiobutton -->
             <div class="genderUser">
-                <input type="radio" name="gender" id="rb1">
-                <input type="radio" name="gender" id="rb2">
+                <input type="radio" name="gender" value="l" id="rb1" {{ old('gender') == 'l' ? 'checked' : '' }}>
+                <input type="radio" name="gender" value="p" id="rb2" {{ old('gender') == 'p' ? 'checked' : '' }}>
                 <span class="genderTitle">Gender</span>
                 <div class="category">
                     <label for="rb1">
@@ -168,15 +182,22 @@
                             <span class="gender">Female</span>
                     </label>
                 </div>
+                @error('gender')
+                    <p id="error-gender" class="text-danger">
+                        {{ $errors->first('gender') }}
+                    </p>
+                @enderror
             </div>
 
             <div class="button">
-                <a class="btn btn-lg button-primary w-100 fs-6 mt-3 mb-5" href="/login/index.php">Register</a>
+                <button type="submit" class="btn btn-lg button-primary w-100 fs-6 mt-3 mb-5">
+                    Register
+                </button>
             </div>
 
-            <div class="linkToLogin">
+            <div class="linkToLogin py-4">
                 <span class="text">Already have an account? Please </span>
-                <span class="login"> <a style="text-decoration: none;" href="/login/index.php"> Sign In </a> </span>
+                <span class="login"> <a style="text-decoration: none;" href="{{ route('login') }}"> Sign In </a> </span>
             </div>
         </div>
         </form>

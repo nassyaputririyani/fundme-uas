@@ -29,7 +29,7 @@
                
                 @guest
                     <li class="nav-item mt-2 mt-lg-0 ms-lg-3">
-                        <a class="btn button-primary w-100 btn-lg fs-6" href="/login">
+                        <a class="btn button-primary w-100 btn-lg fs-6" href="{{ route('login') }}">
                             Login
                         </a>
                     </li>
@@ -42,7 +42,6 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Dashboard</a>
-                            <a class="dropdown-item" href="#">Edit Profile</a>
                             <form action="{{ route('logout') }}" id="form-logout" method="POST">
                                 @csrf
                             </form>
