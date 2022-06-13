@@ -45,7 +45,7 @@
               </p>
             </a>
           </li>
-          @auth
+          {{-- @auth
               @if (Auth::user()->role == 'admin')
               <li class="nav-item">
                 <a href="#" class="nav-link {{ Request::segment(2) == 'users' ? 'active' : '' }}">
@@ -56,7 +56,7 @@
                 </a>
               </li>
               @endif
-          @endauth
+          @endauth --}}
           <li class="nav-item">
             <form action="{{ route('logout') }}" method="post" class="hidden" id="form-logout">
               @csrf

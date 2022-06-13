@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -26,7 +27,7 @@ class AuthController extends Controller
         }
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            // DB::select('CALL log_user_activity(' . Auth::user()->id . ', "Logged in")');
+            DB::select('CALL log_user_activity(' . Auth::user()->id . ', "Logged in")');
             return redirect()->route('index');
         } else {
             return redirect()->back()->withErrors(['password' => 'Email/password salah'])->withInput();
@@ -58,7 +59,7 @@ class AuthController extends Controller
 
         $user = User::create($data);
 
-        // DB::select('CALL log_user_activity(' . $user->id . ', "Registered")');
+        DB::select('CALL log_user_activity(' . $user->id . ', "Registered")');
 
         return redirect()->route('login')->with('success', 'Berhasil mendaftar akun');
     }
@@ -75,10 +76,18 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors())->withInput()->with('error', 'Gagal mengirim email');
         }
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return $status === Password::RESET_LINK_SENT 
+            ? back()->with('success', "Please check your email")
+            : back()->with('error', "Failed to send email");
     }
 
     public function logout() {
-        // DB::select('CALL log_user_activity(' . Auth::user()->id . ', "Logout")');
+        DB::select('CALL log_user_activity(' . Auth::user()->id . ', "Logout")');
 
         Auth::logout();
         return redirect()->route('index');

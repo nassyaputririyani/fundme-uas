@@ -59,3 +59,5 @@ Route::prefix('/admin')->middleware('auth')->group(function() {
     Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions.index');
     Route::put('/transactions/{id}', [AdminTransactionController::class, 'changeStatus'])->name('admin.transactions.update-status');
 });
+
+Route::get('/password/reset', [AuthController::class, 'forgot'])->name('password.reset');
