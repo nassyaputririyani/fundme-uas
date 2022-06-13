@@ -26,7 +26,15 @@
                             {{ $project->description }}
                         </p>
 
-                        <div class="d-flex bd-highlight mt-4">
+                        <p class="mt-5 fs-3">
+                            Owner
+                        </p>
+
+                        <p id="long-description" class="fw-light fs-6 mt-3" style="color: #6B7588;">
+                            {{ $project->user->name }}
+                        </p>
+
+                        <div class="d-flex bd-highlight mt-5">
                             <div class="bd-highlight me-5">
                                 <a href="javascript:void(0)" id="business-proposal" style="text-decoration: none;">
                                     <p class="fs-5 pb-3 fw-bold detail-choose" id="business-text" style="color: #3F72AF;">

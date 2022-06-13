@@ -39,6 +39,7 @@ class ProjectsController extends Controller
             ->join('projects', 'projects.id', '=', 'transactions.projects_id')
             ->selectRaw('users.name, transactions.id, transactions.amount, DENSE_RANK() OVER (ORDER BY transactions.amount DESC) as rank')
             ->where('projects.id', '=', $project->id)
+            ->where('transactions.status', '=', 'paid')
             ->get();
 
         return view('admin.projects.detail', ['project' => $project, 'rank_transactions' => $rank_transactions]);
